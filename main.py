@@ -1,16 +1,15 @@
 import asyncio
 import logging
-from aiogram import Bot, Dispatcher
-from bot import handlers, database
+from aiogram import Bot
 from config import BOT_TOKEN
+from bot.handlers import dp
+from bot import database
 
 logging.basicConfig(level=logging.INFO)
 
 database.init_db()
 
 bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
-dp = Dispatcher()
-dp.include_router(handlers.router)
 
 async def main():
     await dp.start_polling(bot)
